@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse, NoReverseMatch, reverse_lazy
+from django.urls import reverse, NoReverseMatch
 from django.utils.translation import gettext_lazy
 
 class MenuItem(models.Model):
@@ -44,6 +44,7 @@ class MenuItem(models.Model):
         return self.name
 
     def get_url(self):
+        """Фнукция возврата named url или явного url"""
         if self.named_url:
             try:
                 return reverse(self.named_url)
@@ -52,4 +53,5 @@ class MenuItem(models.Model):
         return self.url or '#'
 
     def is_active(self, current_url):
+        """Определение активного меню"""
         return current_url == self.get_url()

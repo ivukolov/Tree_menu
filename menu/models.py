@@ -3,7 +3,9 @@ from django.urls import reverse, NoReverseMatch, reverse_lazy
 from django.utils.translation import gettext_lazy
 
 class MenuItem(models.Model):
-    name = models.CharField(gettext_lazy('Название меню'), max_length=100)
+    name = models.CharField(
+        gettext_lazy('Название меню'), max_length=100
+    )
     menu_name = models.CharField(
         'Название меню',
         max_length=50,
@@ -29,7 +31,9 @@ class MenuItem(models.Model):
         related_name='children',
         verbose_name = 'Родительский пункт меню'
     )
-    order = models.PositiveIntegerField('Порядок стортировки', default=0)
+    order = models.PositiveIntegerField(
+        'Порядок стортировки', default=0
+    )
 
     class Meta:
         verbose_name = 'Пункт меню'
@@ -38,3 +42,14 @@ class MenuItem(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_url(self):
+        if self.named_url:
+            try:
+                return reverse(self.named_url)
+            except NoReverseMatch:
+                return self.named_url
+        return self.url or '#'
+
+    def is_active(self, current_url):
+        return current_url == self.get_url()

@@ -5,6 +5,8 @@ register = template.Library()
 
 @register.inclusion_tag('tree_menu/menu.html', takes_context=True)
 def draw_menu(context, menu_name):
+    """Кастомный template tag для отрисовка меню из базы"""
+
     request = context['request']
     current_url = request.path
 
@@ -12,8 +14,8 @@ def draw_menu(context, menu_name):
     menu_items = MenuItem.objects.filter(menu_name=menu_name).select_related('parent')
 
     # Создаём структуру меню
-    menu_tree = []
-    item_dict = {}
+    menu_tree: list = []
+    item_dict: dict = {}
 
     # Создаём основу для меню
     for item in menu_items:

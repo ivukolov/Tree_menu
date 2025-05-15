@@ -36,3 +36,8 @@ source env/Scripts/activate
 ```bash
 ./set_up_data.sh
 ```
+После успешной проверки можно запускать проект
+
+```bash
+python manage.py runserver
+```

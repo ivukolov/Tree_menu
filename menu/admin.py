@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import MenuItem
 from django.db.models import Q
 
+
 class MenuItemInline(admin.TabularInline):
     model = MenuItem
     extra = 1
@@ -18,8 +19,9 @@ class MenuItemAdmin(admin.ModelAdmin):
     # Оставляем только элементы с подменю
     def get_queryset(self, request):
         queryset = super().get_queryset(request).filter(
-            Q(parent__isnull=True) | (Q(parent__isnull=False) & Q(children__isnull=False))
+            Q(parent__isnull=True) | (Q(parent__isnull=False) & Q(
+                children__isnull=False
+            ))
         ).select_related('parent').distinct()
         print(queryset)
         return queryset
-

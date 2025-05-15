@@ -4,8 +4,9 @@ from menu.models import MenuItem
 register = template.Library()
 
 @register.inclusion_tag('tree_menu/menu.html', takes_context=True)
-def draw_menu(context, menu_name):
-    """Кастомный template tag для отрисовка меню из базы"""
+def draw_menu(context, menu_name: str):
+    """Кастомный template tag для отрисовка меню из базы
+    :param menu_name: str"""
 
     request = context['request']
     current_url = request.path

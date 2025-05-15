@@ -1,5 +1,5 @@
-<li class="menu-item{% if item.is_active %} active{% endif %}{% if item.is_parent_active %}parent-active{% endif %}">
-    <a href="{{ item.item.get_url }}"{% if item.is_active %} class="active"{% endif %}>
+<li class="nav-item{% if item.is_active %} active{% endif %}{% if item.is_parent_active %}parent-active{% endif %}">
+    <a href="{{ item.item.get_url }}" {% if item.is_active %} class="text-white active" {% else %} class="text-white text-decoration-none "{% endif %}>
         {{ item.item.name }}
     </a>
     {% if item.children and item.is_parent_active or item.children and item.is_active %}

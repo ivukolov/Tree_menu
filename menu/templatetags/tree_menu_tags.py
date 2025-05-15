@@ -39,4 +39,5 @@ def draw_menu(context, menu_name):
     return {
         'menu_tree': menu_tree,
         'current_url': current_url,
+        'menu_name': menu_name,
     }

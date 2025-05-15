@@ -1,8 +1,7 @@
 from django.test import TestCase, Client
 from django.shortcuts import reverse
+
 from menu.models import MenuItem
-
-
 
 class MenuCreationTests(TestCase):
     @classmethod
@@ -53,13 +52,21 @@ class MenuCreationTests(TestCase):
         # Проверка количества элементов в базе
         self.assertEqual(queryset.count(), len(self.data.items()))
         # Проверка главого меню
-        self.assertEqual(queryset.get(name=self.data['main_data'][0]), self.main)
+        self.assertEqual(queryset.get(
+            name=self.data['main_data'][0]), self.main
+        )
         # Проверка пункта about
-        self.assertEqual(queryset.get(name=self.data['about_data'][0]), self.about)
+        self.assertEqual(queryset.get(
+            name=self.data['about_data'][0]), self.about
+        )
         self.assertEqual(self.about.parent, self.main)
         # Проверка тестовой вкладки контакты
-        self.assertEqual(queryset.get(name=self.data['contacts_data'][0]), self.contacts)
+        self.assertEqual(queryset.get(
+            name=self.data['contacts_data'][0]), self.contacts
+        )
         self.assertEqual(self.contacts.parent, self.main)
         # Проверка скрытого меню
-        self.assertEqual(queryset.get(name=self.data['hidden_menu'][0]), self.hidden)
+        self.assertEqual(queryset.get(
+            name=self.data['hidden_menu'][0]), self.hidden
+        )
         self.assertEqual(self.hidden.parent, self.contacts)

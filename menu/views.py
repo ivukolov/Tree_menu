@@ -11,4 +11,3 @@ class PageContactsTemplateView(TemplateView):
 
 class PageTradesTemplateView(TemplateView):
     template_name = 'menu/index.html'
-
